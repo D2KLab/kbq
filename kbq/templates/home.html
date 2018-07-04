@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<!--<div class="jumbotron">
+        <div class="col-sm-8 mx-auto">
+          <h1>Knowledge Base Quality Assessment (KBQ)</h1>
+          <p>KBQ is a tool that helps you to perfom quality analysis on any Knowledge Base(KB) using four quality characteristics that are computed using temporal analysis.</p>
+          <p>We use basic statistics (i.e. counts, and diffs) over extracted triples from various KB releases to measure quality characteristics. More specifically, we compute the frequency of predicate and the frequency of entities of a given resource type, and we compare the frequencies with the ones observed in previous releases.</p>
+          <p>
+            <a class="btn btn-primary" href="{{ url_for('webapp.experiment') }}" role="button">Configure Experiment</a>
+          </p>
+        </div>
+</div> -->
+
+<div class="jumbotron">
+    <h1 class="display-5">Knowledge Base Quality Assessment (KBQ)</h1>
+    <p class="lead">KBQ is a tool that helps you to perfom quality analysis on any Knowledge Base(KB) using four quality characteristics that are computed using temporal analysis.</p>
+    <hr class="my-4">
+    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+    <p class="lead">
+      <a class="btn btn-primary btn-lg" href="{{ url_for('webapp.experiment') }}" role="button">Configure Experiment</a>
+    </p>
+  </div>
+
+{% endblock %}

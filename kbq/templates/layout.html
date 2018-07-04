@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.4/dist/loadingoverlay.min.js"></script>
+        
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <!-- Data Table CSS -->
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+        <!-- Custom CSS -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/custom.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/loading.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bs.sm.css') }}">
+        
+        
+        <!-- Java Scripts -->
+        <!--<script src="{{ url_for('static', filename='js/form.js') }}"></script>-->
+        <script src="{{ url_for('static', filename='js/bs.sm.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/progressbar.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/datatable.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/postdb.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/mustache.js') }}"></script>
+
+        
+        {% if title %}
+            <title>KBQ - {{ title }}</title>
+        {% else %}
+            <title>KBQ</title>
+        {% endif %}
+    </head>
+    <body>
+        {% include 'includes/_navbar.html' %}
+        <div class="container">
+    
+            {% block body %}{% endblock %}
+            {% include 'includes/_footer.html' %}
+        </div>
+     </body>
+</html>

@@ -1,0 +1,27 @@
+show dbs
+
+use kbq
+
+Create user
+db.createUser({
+
+    user: "rifat",
+    pwd: "123456",
+    roles : ["readWrite","dbAdmin"]
+    
+})
+
+CRUD
+
+db.createCollection("entityTable");
+
+show collections
+
+
+db.entityTable.insert({
+    firstname: "t1",
+    lastname: "t2",
+
+});
+
+db.entityTable.find()
