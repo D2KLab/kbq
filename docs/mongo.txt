@@ -1,3 +1,5 @@
+localhost
+
 show dbs
 
 use kbq
@@ -13,7 +15,9 @@ db.createUser({
 
 CRUD
 
-db.createCollection("entityTable");
+db.createCollection("stat");
+db.createCollection("experiment");
+
 
 show collections
 
