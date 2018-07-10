@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+#from flask_mongoalchemy import PyMongo
 from flask_pymongo import PyMongo
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
@@ -17,7 +18,7 @@ mail = Mail()
 
 import time
 import schedule
-from kbq.schdeduler.apiScheduler import scheduler_module
+from kbq.scheduler.apiScheduler import scheduler_module
 
 
 def create_app(config_class = Config):
@@ -37,7 +38,7 @@ def create_app(config_class = Config):
     from kbq.rest.routes import rest
     from kbq.webapp.routes import webapp
     from kbq.metrics.metrics import metrics
-    from kbq.schdeduler.apiScheduler import schedule
+    from kbq.scheduler.apiScheduler import schedule
         
     app.register_blueprint(rest)
     app.register_blueprint(metrics)
