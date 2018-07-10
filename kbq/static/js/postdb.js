@@ -1,25 +1,28 @@
 $(document).ready(function() {
 
+    //Disbale attributes
+    //$("#btnRunExp").prop("disabled", true);
+    document.getElementById("graph").disabled = true;
+    document.getElementById('btnGraph').disabled = true;
+    
+    document.getElementById('btnRunExp').disabled = true;
+    document.getElementById("className").disabled = true;
+
+    document.getElementById("btnReset").disabled = true;
+    
 
     var $endpointDom = $('#endpoint');
     var $graphDom = $('#graph');
     var $classNameDom = $('#className');
 
-    var $msg = $('#msg');
+    var $msg = $('#notify_msg');
 
     var msgTemplate = "<li> Experiment Created. Please Send an Email to mohammad.rashid@polito.it to activate the process.</li>";
     function addMsg(msg){
-
         //$msg.append(Mustache.render(msgTemplate,msg));
-
         $msg.append('<li> Experiment Created. Please Send an Email to mohammad.rashid@polito.it to activate the process.</li>')
     }
 
-
-
-    $.ajax({
-       
-    });
 
     $('#btnEndpoint').on('click',function(){
         
@@ -44,13 +47,27 @@ $(document).ready(function() {
 					option.attr('value', data.endpoint[i]);
 					datalist.append(option);
                 }
+
+
+                //Change div color
+                //$('#two').css('background-color', 'black');
+                //Remove color
+                //$('#two').css('background-color', '');
+                
+                document.getElementById("graph").disabled = false;
+                document.getElementById("btnGraph").disabled = false;
+                document.getElementById("btnReset").disabled = false;
+
+                // focus next button
+                // $( "#btnGraph" ).focus();
+                $(this).next("#btnGraph").focus();
+
                 $.LoadingOverlay("hide");
             },
             error: function(){
                 alert('server error')
                 $.LoadingOverlay("hide");
             }
-            
         });  
         event.preventDefault(); 
     });
@@ -79,6 +96,11 @@ $(document).ready(function() {
 					option.attr('value', data.className[i]);
 					datalist.append(option);
                 }
+
+
+                document.getElementById("btnRunExp").disabled = false;
+                document.getElementById("className").disabled = false;
+
                 $.LoadingOverlay("hide");
             },
             error: function(){
@@ -112,17 +134,25 @@ $(document).ready(function() {
 
                 //$("#dialog").dialog();
 
-                $msg.append('<div class="alert alert-dismissible alert-primary">'+
-                            '<p>Experiment Status: Create </p>'+
-                            '<p>Experiment ID:'+ data.expId +'</p>'+
-                            '<p>Please Send an Email to mohammad.rashid@polito.it to activate the process.</p>'+
-                            '</div>');
-            
+                if(data.Flag){
 
+                   $msg.empty(); 
+
+                    $msg.append('<div>'+
+                                '<p>Experiment Status:'+data.status+'</p>'+
+                                '<p>Experiment ID:'+ data.expId +'</p>'+
+                                '<p>Please Send an Email to mohammad.rashid@polito.it to activate the process.</p>'+
+                                '</div>');    
+
+                }else{
+                    alert('Experiment Already Exists')
+                }
+              
                 $.LoadingOverlay("hide");
 
-                //var $dialog = $('<div></div>') .html('This dialog will show every time!') .dialog({ autoOpen: false, title: 'Basic Dialog' });
+                document.getElementById("btnReset").disabled = false;
 
+                //var $dialog = $('<div></div>') .html('This dialog will show every time!') .dialog({ autoOpen: false, title: 'Basic Dialog' });
                 //$("<div>hello!</div>").dialog();
 
             },
@@ -134,4 +164,27 @@ $(document).ready(function() {
         });  
         event.preventDefault(); 
     });
-});
+
+    $('#btnReset').on('click',function(){
+
+        document.getElementById("graph").value = '';
+
+        $("datalist-graph").empty();
+
+        $msg.empty(); 
+
+        document.getElementById("graph").disabled = true;
+        document.getElementById("btnGraph").disabled = true;
+        
+        //document.getElementById("className").innerHTML = '';
+        document.getElementById("className").value = '';
+
+        document.getElementById("className").disabled = true;
+        document.getElementById("btnRunExp").disabled = true;
+
+        document.getElementById("btnReset").disabled = true;
+
+        event.preventDefault(); 
+    });
+
+}); 

@@ -1,17 +1,14 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<div class="card mb-3">
-        <h3 class="card-header">Experimental Results</h3>
-        <div class="card-body">
-        </div>
-    
+
+
+
+<div class="container" align="left">
+    <embed type="image/svg+xml" src={{graph_data|safe}} style='max-width:1000px'/>
 </div>
-<div class="card">
-    <div class="card-body">
-        <h4 class="card-title">Query Endpoints</h4>
-        
-    </div>
-</div>
+
+
+
 {% endblock %}
 

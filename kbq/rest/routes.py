@@ -3,13 +3,25 @@ from flask import (render_template, url_for, flash,
 from kbq import mongo
 from kbq.sparql.queries import query_dbpedia_entityCount, query_graph, query_className, query_property_count , query_entity_count
 
-from kbq.models import add_experiment,get_one_experiment
+from kbq.models import (add_experiment,get_one_experiment, update_experiment_enabled,
+                        update_experiment_status,append_stats,get_all_experiment,delete_all_records,stats_snapshots)
+from kbq.metrics.completeness import Completeness
+from kbq.metrics.consistency import Consistency
 
 rest = Blueprint('rest',__name__)
 
-@rest.route('/rest/<name>',methods=['GET','POST'])
-def test(name):
-    return name 
+@rest.route('/metrics/completeness/<expId>',methods=['GET'])
+def completeness(expId):
+    comp = Completeness()
+    stat = comp.meaures(expId)
+    return stat
+
+@rest.route('/metrics/consistency/<expId>',methods=['GET'])
+def consistency(expId):
+    cons = Consistency()
+    stat = cons.meaures(expId)
+    return stat
+
 
 @rest.route('/rest/queryTest',methods=['GET','POST'])
 def queryTest():
@@ -78,19 +90,6 @@ def properties():
     return jsonify({'result': results})
 
 
-
-
-
-# testing adding users
-#@rest.route('/add')
-#def add():
- #   user = mongo.db.kbq
-  #  user.insert({'name':'Anthony','language':'Python'})
-   # user.insert({'name':'Kelly','language':'C'})
-    #user.insert({'name':'John','language':'Java'})
-   # user.insert({'name':'Cedric','language':'Haskell'})
-   # return 'Added User!'
-
 # Save experimental data in mongoDB
 
 @rest.route('/rest/addexperiment',methods = ['GET'])
@@ -104,11 +103,57 @@ def save_experiment():
 
     results = add_experiment(endpoint,graph,className,property_list)
          
-    return results
+    return jsonify(results)
 
 @rest.route('/rest/getexperiment/<expId>',methods = ['GET'])
 def get_experiment(expId):
 
     results = get_one_experiment(expId)
 
-    return results
+    return jsonify(results)
+
+
+@rest.route('/rest/getallexperiment',methods = ['GET'])
+def find_all_experiment():
+
+    results = get_all_experiment()
+
+    return jsonify(results)
+
+
+@rest.route('/rest/append_exp/<expId>',methods = ['GET'])
+def append_exp(expId):
+    
+    """
+    Periodic snapshots checks
+    Test Sparql Endpoint:
+    endpoint = 'http://dbpedia.org/sparql'
+    graph = 'http://dbpedia.org'
+    className = 'http://dbpedia.org/ontology/Place'
+    property_list = query_property_count(endpoint,graph,className)
+    results = append_stats(expId,property_list)
+    """
+    results = stats_snapshots(expId)
+
+    return jsonify(results)
+
+@rest.route('/rest/update_enabled/<expId>/<value>',methods = ['GET'])
+def update_enabled(expId,value):
+    results = update_experiment_enabled(expId,value)
+    return jsonify(results)
+
+@rest.route('/rest/update_status/<expId>/<value>',methods = ['GET'])
+def update_status(expId,value):
+
+    results = update_experiment_status(expId,value)
+
+    return jsonify(results)
+
+@rest.route('/rest/delete_all')
+def delete_all():
+
+    output = delete_all_records()    
+
+    return jsonify(output)
+
+

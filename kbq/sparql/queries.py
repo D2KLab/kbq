@@ -105,7 +105,7 @@ def query_property_count(endpoint,graph,className):
       where  {
          graph<%s>{ ?s a <%s>. }
          ?s ?p ?o.
-        }
+        } LIMIT 2
      """%(graph,className))
     sparql.setReturnFormat(JSON)
     results = sparql.query().convert()
@@ -121,7 +121,7 @@ def query_entity_count(endpoint,graph,className):
 
     sparql = SPARQLWrapper(endpoint)
     sparql.setQuery("""
-     select (COUNT(?s) as ?entityCount) 
+     select (COUNT(distinct ?s) as ?entityCount) 
       where  {
          graph<%s>{ ?s a <%s>. }
       }
@@ -131,7 +131,7 @@ def query_entity_count(endpoint,graph,className):
 
     print(results)
 
-    output = {'entityCount': int(results['results']['bindings'][0]['entityCount']['value'])}
+    output = int(results['results']['bindings'][0]['entityCount']['value'])
     print(output)
 
     return output

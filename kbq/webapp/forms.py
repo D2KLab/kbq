@@ -9,3 +9,7 @@ class experimentForm(Form):
     graph = StringField('Graph',validators=[DataRequired(),Length(max=20)])
     className = StringField('Class Name',validators=[DataRequired(),Length(max=20)])
 
+
+    def check_exists(self):
+        pass
+

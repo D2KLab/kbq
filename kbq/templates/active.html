@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<h2 class="pb-3 pt-2">Active Experiments</h2>
+<hr class="my-4">
+
+  <table class="table table-stripped">
+        <tr>
+                <th>Class Name</th>
+                <th>Graph</th>
+                <th>SPARQL Endpoint</th>
+                <th></th>
+        </tr>
+        
+        {% for result in results %}
+        <tr>
+                <th>{{result.className}}</th>
+                <th>{{result.graph}}</th>
+                <th>{{result.sparql}}</th>
+                <td><a href="/rest/getexperiment/{{result.expId}}" class="btn btn-primary pull-right">View</a></td>
+        </tr>
+        {% endfor %}
+
+  </table>
+
+
+
+{% endblock %}

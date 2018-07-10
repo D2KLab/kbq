@@ -8,7 +8,10 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.4/dist/loadingoverlay.min.js"></script>
-        
+        <!--chart js-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <!-- Data Table CSS -->
@@ -18,6 +21,8 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/custom.min.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/loading.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bs.sm.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/timeline.css') }}">
+
         
         
         <!-- Java Scripts -->
@@ -25,8 +30,9 @@
         <script src="{{ url_for('static', filename='js/bs.sm.js') }}"></script>
         <script src="{{ url_for('static', filename='js/progressbar.js') }}"></script>
         <script src="{{ url_for('static', filename='js/datatable.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/postdb.js') }}"></script>
         <script src="{{ url_for('static', filename='js/mustache.js') }}"></script>
+
+        
 
         
         {% if title %}

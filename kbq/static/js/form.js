@@ -4,7 +4,7 @@ $(document).ready(function() {
 	$('#formEndpoint').on('submit', function(event) {
 
 		//var modal = $('<div>').dialog({ modal: true });
-        //    modal.dialog('widget').hide();
+        //    modal.dialog('widget').hide();btnReset
 		//$('#ajax_loader').show();
 		
 		$.ajax({
