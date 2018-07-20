@@ -48,7 +48,6 @@ $(document).ready(function() {
 					datalist.append(option);
                 }
 
-
                 //Change div color
                 //$('#two').css('background-color', 'black');
                 //Remove color

@@ -105,7 +105,7 @@ def query_property_count(endpoint,graph,className):
       where  {
          graph<%s>{ ?s a <%s>. }
          ?s ?p ?o.
-        } LIMIT 2
+        } 
      """%(graph,className))
     sparql.setReturnFormat(JSON)
     results = sparql.query().convert()

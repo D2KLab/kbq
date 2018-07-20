@@ -2,13 +2,184 @@
 
 {% block body %}
 
+<script  type="text/javascript">
+        /* JAVASCRIPT CODE GOES HERE */
+    
+        $.LoadingOverlay("show");
+       
+    
+        var graphsCons = {{ resultsConsistency | safe}};
+    
+        var graphsComp = {{ resultsCompleteness | safe}};
+    
+        var graphsPer = {{ resultsPersistency | safe}};
+        
+        //Plotly.plot(plotConsistency, graphsCons);
+    
+        //Plotly.plot(plotPersistency,graphsPer);
+            
+</script>
+
+<!--Persistency-->
+<div class="card mb-3">
+        <h4 class="card-header">Persistency</h4>
+</div>
+
+<div class="card">
+        <div class="card-body">
+            <h4 class="card-title"></h4>
+        </div>
+</div>
 
 
-<div class="container" align="left">
-    <embed type="image/svg+xml" src={{graph_data|safe}} style='max-width:1000px'/>
+<div class="card">
+        <div class="card-body">
+                        <table id="example3" class="display" style="width:100%">
+                                        <thead>
+                                                <tr>
+                                                            <th>Entity</th>
+                                                            <th>Timestamp</th>
+                                                            <th>Count</th>
+                                                          
+                                                            
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                            {% for result in resultsPersistency %}
+                                                            <tr>
+                                                                    <th>{{result.name}}</th>
+                                                                    <th>{{result.x}}</th>
+                                                                    <th>{{result.y}}</th>
+                                                             
+                                                            </tr>
+                                                            {% endfor %}
+                                            </tbody>
+                
+                        </table>
+           
+        </div>
 </div>
 
 
 
+<!--Historical Persistency-->
+<div class="card mb-3">
+        <h4 class="card-header">Historical Persistency</h4>
+</div>
+
+<div class="card">
+        <div class="card-body">
+            <h4 class="card-title"></h4>
+        </div>
+</div>
+
+
+<div class="card">
+        <div class="card-body">
+           <h5 class="card-title"></h5>
+           <hr>
+           <div id="plotPersistency"></div>
+        </div>
+</div>
+
+
+<!--Consistency-->
+
+<div class="card mb-3">
+        <h4 class="card-header">Consistency</h4>
+</div>
+
+<div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Property List</h5>
+            <hr>
+                <table id="example" class="display" style="width:100%">
+                        <thead>
+                                <tr>
+                                            <th>Perperty</th>
+                                            <th>Timestamp</th>
+                                            <th>Count</th>
+                                          
+                                            
+                                </tr>
+                            </thead>
+                            <tbody>
+                                            {% for result in resultsConsistency %}
+                                            <tr>
+                                                    <th>{{result.name}}</th>
+                                                    <th>{{result.x}}</th>
+                                                    <th>{{result.y}}</th>
+                                            </tr>
+                                            {% endfor %}
+                            </tbody>
+
+                    </table>
+        </div>
+</div>
+
+
+<div class="card">
+        <div class="card-body">
+                <h5 class="card-title">Consistency plot</h5>
+                <hr>
+            <div id="plotConsistency"></div>
+        </div>
+</div>
+
+<!--Completeness-->
+
+<div class="card mb-3">
+        <h4 class="card-header">Completeness</h4>
+</div>
+
+<div class="card">
+        <div class="card-body">
+            <h4 class="card-title"></h4>
+            <h5 class="card-title">Property List</h5>
+            <hr>
+                <table id="example2" class="display" style="width:100%">
+                        <thead>
+                                <tr>
+                                            <th>Perperty</th>
+                                            <th>Timestamp</th>
+                                            <th>Count</th>                
+                                </tr>
+                            </thead>
+                            <tbody>
+                                            {% for comp in resultsCompleteness %}
+                                            <tr>
+                                                    <th>{{comp.name}}</th>
+                                                    <th>{{comp.x}}</th>
+                                                    <th>{{comp.y}}</th>
+                                            </tr>
+                                            {% endfor %}
+                            </tbody>
+
+                    </table>
+        </div>
+</div>
+
+
+<div class="card">
+        <div class="card-body">
+           
+        </div>
+</div>
+
+
+<script  type="text/javascript">
+        /* JAVASCRIPT CODE GOES HERE */
+    
+ 
+        
+        Plotly.plot(plotConsistency, graphsCons);
+    
+        Plotly.plot(plotPersistency,graphsPer);
+  
+            
+</script>       
+            
+
 {% endblock %}
+
 

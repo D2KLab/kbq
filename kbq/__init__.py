@@ -7,6 +7,7 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from kbq.config import Config
 from flask_apscheduler import APScheduler
+#from apscheduler.schedulers.background import BackgroundScheduler
 
 mongo = PyMongo()
 bcrypt = Bcrypt()
@@ -46,9 +47,11 @@ def create_app(config_class = Config):
     app.register_blueprint(schedule)
 
     scheduler  = APScheduler()
+    #scheduler = BackgroundScheduler()
     scheduler.init_app(app)
-    scheduler.add_job(func=scheduler_module,id='1',trigger='interval',hours=4,replace_existing=True)
-    #scheduler.add_job(scheduler_module, trigger='interval', seconds=3)
+    scheduler.add_job(func=scheduler_module,id='1',trigger='interval',hours=10, replace_existing=False)
+    #scheduler.add_job(scheduler_module, trigger='interval', seconds=30)
+    #scheduler.add_job(func=scheduler_module,id='1', trigger='interval', seconds=30)
     scheduler.start()
         
     return app

@@ -1,0 +1,3 @@
+rifat_abir@flaskapp:cd /var
+rifat_abir@flaskapp:/var$ sudo su
+root@flaskapp:/var# source venv/bin/activate

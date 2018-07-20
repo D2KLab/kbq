@@ -1,0 +1,14 @@
+
+# running a gunicorn instance
+
+gunicorn run:app --log-file - --bind 0.0.0.0:80
+
+# gunicorn running back ground:
+
+gunicorn run:app --name grand56 --workers 3 --user=root --group=root --bind=0.0.0.0:80 --daemon
+
+sudo pkill gunicorn
+
+
+
+gunicorn run:app --name grand56 --workers 3 --bind=127.0.0.1:7000 --daemon

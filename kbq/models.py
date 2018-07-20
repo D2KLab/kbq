@@ -95,8 +95,8 @@ def append_stats(expId,propertyList):
 
     print(expId)
 
-    exp_output = exp.find_one({'_id': ObjectId(expId)})
-    exp_output['_id'] = expId
+    exp_output = exp.find_one({'_id': expId})
+    #exp_output['_id'] = expId
 
     if exp_output:
 
@@ -177,15 +177,17 @@ def get_one_experiment(expId):
     print(expId)
 
     exp_output = exp.find_one({'_id': ObjectId(expId)})
-    exp_output['_id'] = expId
+    #print(exp_output)
+    #exp_output['_id'] = expId
 
     if exp_output:
+        
         stat_output = stat.find_one({'experiment_id': str(expId)})
         stat_output['_id'] = str(stat_output['_id'])
         
         output = stat_output #jsonify({'experiment': exp_output,'stat': stat_output})
     else:
-        output = jsonify({'results':'No result found'})
+        output = {'results':'No result found'}
 
     return output
 

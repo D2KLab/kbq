@@ -18,9 +18,10 @@ def completeness(expId):
 
 @rest.route('/metrics/consistency/<expId>',methods=['GET'])
 def consistency(expId):
-    cons = Consistency()
+    cons = Consistency()   
     stat = cons.meaures(expId)
-    return stat
+    
+    return jsonify(stat)
 
 
 @rest.route('/rest/queryTest',methods=['GET','POST'])
