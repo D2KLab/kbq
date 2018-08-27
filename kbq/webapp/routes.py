@@ -5,13 +5,13 @@ from kbq.sparql.queries import query_with_endpoint,query_graph,query_className,q
 from kbq.rest.routes import find_all_experiment
 from kbq.models import get_all_experiment,add_experiment,check_className
 import pygal
+import pandas as pd
+import numpy as np
 
 from kbq.metrics.completeness import Completeness
 from kbq.metrics.consistency import Consistency
 from kbq.metrics.persistency import Persistency
 from kbq.metrics.hpersistency import Hpersistency
-
-
 
 webapp = Blueprint('webapp',__name__)
 
@@ -35,7 +35,13 @@ def active_experiment():
     """Active experiment details"""
     results = get_all_experiment()
 
-    return render_template('active.html', results = results)
+    res_active=[]
+
+    for result in results:
+        if str(result['enabled']) == "True":
+            res_active.append(result)
+
+    return render_template('active.html', results = res_active)
 
 
 #@webapp.route('/results')
@@ -49,20 +55,34 @@ def active_experiment():
 #    graph.add('C++',     [5,  51, 54, 102, 150, 201])
 #    graph.add('All others combined!',  [5, 15, 21, 55, 92, 105])
 #    graph_data = graph.render_data_uri()
-   
 #    return render_template('results.html', graph_data = graph_data)
 
 @webapp.route('/results/<expId>')
 def resultView(expId):
+
     cons = Consistency()
     comp = Completeness()
     per = Persistency()
+    hper = Hpersistency()
+
     statPersistency = per.meaures(expId)
-    statConsistency = cons.meaures(expId)
+    perValue = per.persistencyValue(expId) 
+
+    df = per.table_values(expId) 
+    entity = per.name_entity(expId)
+
+    statHpersistency = hper.meaures(expId)
+    
+    HperValue = hper.H_persistencyValue(expId)
+
     statCompleteness = comp.meaures(expId)
+    comValue = comp.comp_value(expId)
+    print(comValue)    
+    statConsistency = cons.meaures(expId)
+    conValue = cons.consistency_value(expId)
     
     #print(stat)
-    return render_template('results.html', resultsConsistency = statConsistency, resultsCompleteness = statCompleteness,resultsPersistency = statPersistency)
+    return render_template('results.html', resultsConsistency = statConsistency,conValue=conValue, comValue = comValue, HperValue = HperValue, df = df, entity = entity, resultsCompleteness = statCompleteness,resultsPersistency = statPersistency,resultsHpersistency = statHpersistency, perValue = perValue)
 
 @webapp.route('/experiment',methods = ['GET','POST'])
 def experiment():  
@@ -120,11 +140,9 @@ def shape():
 def about():
     return render_template('about.html', title='About Us')
 
-
 #@webapp.route('/results/<results>')
 #def results(results):
-    
-#    return render_template('results.html', results = results) 
+#   return render_template('results.html', results = results) 
     
     
 

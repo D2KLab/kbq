@@ -33,6 +33,6 @@ $(document).ready(function() {
         alert( table.rows('.selected').data().length +' row(s) selected' );
     } );
 
-
+    $.LoadingOverlay("hide");
 
 } );

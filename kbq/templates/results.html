@@ -5,180 +5,189 @@
 <script  type="text/javascript">
         /* JAVASCRIPT CODE GOES HERE */
     
-        //$.LoadingOverlay("show");
-       
+        $.LoadingOverlay("show");
     
         var graphsCons = {{ resultsConsistency | safe}};
     
         var graphsComp = {{ resultsCompleteness | safe}};
     
         var graphsPer = {{ resultsPersistency | safe}};
+
+        var graphHper = {{ resultsHpersistency | safe}};
         
         //Plotly.plot(plotConsistency, graphsCons);
-    
+  
         //Plotly.plot(plotPersistency,graphsPer);
             
 </script>
 
 <!--Persistency-->
-<div class="card mb-3">
-        <h4 class="card-header">Persistency</h4>
-</div>
 
-<div class="card">
-        <div class="card-body">
-            <h4 class="card-title"></h4>
-        </div>
-</div>
+<hr>
+  <div class="row">
 
+         <div class="col-lg-3">
+                                <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+                                                <div class="card-body">
+                                                  <h3 class="card-title">Persistency ({{perValue}}) </h3>
+                                                  <h4 class="card-title"></h4>
+                                                </div>
+                                </div>
+                                <div class="card bg-light mb-3" style="max-width: 20rem;">
+                                                <div class="card-body">
+                                                        <h4 class="card-title">Persistency measures value (0,1)</h4>
+                                                        <p class="card-text">The value of (1) implies there are no peristency issues in the class.</p>
+                                                        <p class="card-text">The value of (0) indicates peresistency issues found in the class.</p>
+                                                </div>
+                                </div>
+        
+         </div>
+         <div class="col-lg-9">
+                <div class="card bg-light mb-3" style="max-width: 90rem;">
+                                   <div class="card-body">
+                                        <h4 class="card-title">Class Name: {{entity}}</h4>
+      
+                                   </div>
+                </div>
 
-<div class="card">
-        <div class="card-body">
-                        <table id="example3" class="display" style="width:100%">
-                                        <thead>
-                                                <tr>
-                                                            <th>Entity</th>
-                                                            <th>Timestamp</th>
-                                                            <th>Count</th>
-                                                          
-                                                            
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                            {% for result in resultsPersistency %}
-                                                            <tr>
-                                                                    <th>{{result.name}}</th>
-                                                                    <th>{{result.x}}</th>
-                                                                    <th>{{result.y}}</th>
-                                                             
-                                                            </tr>
-                                                            {% endfor %}
-                                            </tbody>
-                
-                        </table>
-           
-        </div>
-</div>
+                <table id="example3" class="display" style="width:100%">
+                                <thead>
+                                        <tr>
+                                             
+                                                    <th>Timestamp</th>
+                                                    <th>Count</th>
+                                                    
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                                    {% for key,value in df.iterrows() %}
+                                                    <tr>
+                                                            <th>{{value["Date"]}}</th>
+                                                            <th>{{value["Count"]}}</th>
+                                                    </tr>
 
+                                                    {% endfor %}
+                                    </tbody>
+        
+                </table>
+        
+        </div>         
 
-
+  </div>
+  <hr>
 <!--Historical Persistency-->
-<div class="card mb-3">
-        <h4 class="card-header">Historical Persistency</h4>
+<div class="row">
+
+        <div class="col-lg-3">
+
+                        <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+                                        <div class="card-body">
+                                          <h3 class="card-title">Historical Persistency ({{HperValue}}%) </h3>
+                                          <h4 class="card-title"></h4>
+                                        </div>
+                        </div>
+                        <div class="card bg-light mb-3" style="max-width: 20rem;">
+                                        <div class="card-body">
+                                                <h4 class="card-title">Percentage(%) of historical persistency</h4>
+                                                <p class="card-text">High % presentes an estimation of fewer isses.</p>
+                                                <p class="card-text">Lower % entail an estimation of more isses.</p>
+                                        </div>
+                        </div>
+                
+        </div> 
+        <div class="col-lg-9">
+                        <div id="plotPersistency"></div> 
+        </div> 
 </div>
 
-<div class="card">
-        <div class="card-body">
-            <h4 class="card-title"></h4>
+<hr>
+
+<!--Completeness-->
+
+<div class="row">
+        <div class="col-lg-3">
+                        <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+                                        <div class="card-body">
+                                          <h3 class="card-title">Completeness ({{HperValue}}%) </h3>
+                                          <h4 class="card-title"></h4>
+                                        </div>
+                        </div>
+                
         </div>
-</div>
-
-
-<div class="card">
-        <div class="card-body">
-           <h5 class="card-title"></h5>
-           <hr>
-           <div id="plotPersistency"></div>
+        <div class="col-lg-9">
+                        <div class="card bg-light mb-3" style="max-width: 80rem;">
+                                        <div class="card-body">
+                                             <p class="card-text">High % presentes an estimation of fewer isses.</p>
+                                             <p class="card-text">Lower % entail an estimation of more isses.</p>  
+                                        </div>
+                        </div>
+                
         </div>
+        
 </div>
 
+<div id="plotCompleteness"></div>
+<hr>
 
 <!--Consistency-->
-
-<div class="card mb-3">
-        <h4 class="card-header">Consistency</h4>
+<div class="row">
+        <div class="col-lg-3">
+                <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+                                       <div class="card-body">
+                                          <h3 class="card-title">Consistency ({{conValue}}%) </h3>
+                                          <h4 class="card-title"></h4>
+                                        </div>
+                        </div>
+        </div>
+        <div class="col-lg-9">
+                        <div class="card bg-light mb-3" style="max-width: 80rem;">
+                                        <div class="card-body">
+                                             <p class="card-text">The value of 1 implies no Consistency issue present in the property. 
+                                                     The value of 0 indicates Consistency issues found in the property</p>
+                                             <p class="card-text"></p>  
+                                        </div>
+                        </div>
+        </div>         
 </div>
 
-<div class="card">
-        <div class="card-body">
-            <h5 class="card-title">Property List</h5>
             <hr>
                 <table id="example" class="display" style="width:100%">
                         <thead>
                                 <tr>
                                             <th>Perperty</th>
                                             <th>Timestamp</th>
-                                            <th>Count</th>
-                                          
-                                            
+                                            <th>Consistency</th>
+                       
                                 </tr>
                             </thead>
                             <tbody>
                                             {% for result in resultsConsistency %}
                                             <tr>
                                                     <th>{{result.name}}</th>
-                                                    <th>{{result.x}}</th>
-                                                    <th>{{result.y}}</th>
+                                                    <th>{{result.x[-1]}}</th>
+                                                    <th>{{result.Consistency}}</th>
+
                                             </tr>
                                             {% endfor %}
                             </tbody>
 
                     </table>
-        </div>
-</div>
 
-
-<div class="card">
-        <div class="card-body">
-                <h5 class="card-title">Consistency plot</h5>
-                <hr>
-            <div id="plotConsistency"></div>
-        </div>
-</div>
-
-<!--Completeness-->
-
-<div class="card mb-3">
-        <h4 class="card-header">Completeness</h4>
-</div>
-
-<div class="card">
-        <div class="card-body">
-            <h4 class="card-title"></h4>
-            <h5 class="card-title">Property List</h5>
+                    <hr>
             <hr>
-                <table id="example2" class="display" style="width:100%">
-                        <thead>
-                                <tr>
-                                            <th>Perperty</th>
-                                            <th>Timestamp</th>
-                                            <th>Count</th>                
-                                </tr>
-                            </thead>
-                            <tbody>
-                                            {% for comp in resultsCompleteness %}
-                                            <tr>
-                                                    <th>{{comp.name}}</th>
-                                                    <th>{{comp.x}}</th>
-                                                    <th>{{comp.y}}</th>
-                                            </tr>
-                                            {% endfor %}
-                            </tbody>
 
-                    </table>
-        </div>
-</div>
-
-
-<div class="card">
-        <div class="card-body">
-           
-        </div>
-</div>
+  <!-- <div id="plotConsistency"></div> -->
 
 
 <script  type="text/javascript">
         /* JAVASCRIPT CODE GOES HERE */
-    
- 
-        
-        Plotly.plot(plotConsistency, graphsCons);
-    
-        Plotly.plot(plotPersistency,graphsPer);
-
-       // $.LoadingOverlay("hide");
-  
             
+        //Plotly.plot(plotConsistency, graphsCons);
+    
+        Plotly.plot(plotPersistency,graphHper);
+
+        Plotly.plot(plotCompleteness,graphsComp);
+             
 </script>       
             
 

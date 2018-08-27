@@ -9,6 +9,4 @@ gunicorn run:app --name grand56 --workers 3 --user=root --group=root --bind=0.0.
 
 sudo pkill gunicorn
 
-
-
 gunicorn run:app --name grand56 --workers 3 --bind=127.0.0.1:7000 --daemon

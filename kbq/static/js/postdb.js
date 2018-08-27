@@ -49,7 +49,7 @@ $(document).ready(function() {
                 }
 
                 //Change div color
-                //$('#two').css('background-color', 'black');
+                $('#two').css('background-color', 'black');
                 //Remove color
                 //$('#two').css('background-color', '');
                 
@@ -96,7 +96,7 @@ $(document).ready(function() {
 					datalist.append(option);
                 }
 
-
+                $('#three').css('background-color', 'black');
                 document.getElementById("btnRunExp").disabled = false;
                 document.getElementById("className").disabled = false;
 
@@ -149,6 +149,8 @@ $(document).ready(function() {
               
                 $.LoadingOverlay("hide");
 
+                $('#four').css('background-color', 'black');
+
                 document.getElementById("btnReset").disabled = false;
 
                 //var $dialog = $('<div></div>') .html('This dialog will show every time!') .dialog({ autoOpen: false, title: 'Basic Dialog' });
@@ -169,6 +171,9 @@ $(document).ready(function() {
         document.getElementById("graph").value = '';
 
         $("datalist-graph").empty();
+        $('#two').css('background-color', '');
+        $('#three').css('background-color', '');
+        $('#four').css('background-color', '');
 
         $msg.empty(); 
 

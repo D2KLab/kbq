@@ -40,8 +40,62 @@ class Persistency(Metrics):
         trace['y'] = entity_count
         trace['name'] = self.name_entity(expId)
         data_plot.append(trace)
+
                                
         return data_plot
+
+    def table_values(self,expId):
+        stats_obj = self.get_stats(expId)
+
+        r = json.dumps(stats_obj,default=self.myconverter) 
+        stats_obj_json = json.loads(r)
+
+        data_time = []
+        entity_count = []  
+
+        for entity in stats_obj_json['entity_stats']:
+            
+            date_timestamp = str(entity['timestamp']).split(' ')
+            
+            data_time.append(date_timestamp[0])
+
+            entity_count.append(int(entity['entityCount']))
+
+        data_plot = []
+        trace = {}
+        trace['x'] = data_time
+        trace['y'] = entity_count
+        trace['name'] = self.name_entity(expId)
+        data_plot.append(trace)
+
+        df = pd.DataFrame(list(zip(data_time, entity_count)), columns=['Date','Count'])
+                               
+        return df
+
+    
+    def persistencyValue(self,expId):
+        stats_obj = self.get_stats(expId)
+
+        r = json.dumps(stats_obj,default=self.myconverter) 
+        stats_obj_json = json.loads(r)
+
+        data_time = []
+        entity_count = []  
+
+        for entity in stats_obj_json['entity_stats']:
+            
+            date_timestamp = str(entity['timestamp']).split(' ')
+            
+            data_time.append(date_timestamp[0])
+
+            entity_count.append(int(entity['entityCount']))
+
+        per_value = 1
+
+        if entity_count[-1] < entity_count[-2]:
+            per_value = 0        
+
+        return per_value
 
 
     def name_entity(self,expId):
