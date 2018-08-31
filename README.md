@@ -3,13 +3,12 @@ An intelligent agent that performs quality assessment and validation of knowledg
 
 ## Architecture
 
-The package `KBQ` is composed of the following modules:
+The package `kbq` is composed of the following modules:
 
 - `metrics`, which contains the abstract class *metrics* and the concrete classess *completeness*, *consistency*,*hpersistency*, and *persistency*;
 - `sparql`, which ontains the script *queries* that extract summary statistics based on SPARQL queries;
 - `scheduler`, which contains the script *apiScheduler* that perform periodic scheduling tasks;
 - `rest`, which contains the scripts for quality assessment and validation rest apis;
-
 
 
 ## Instruction
