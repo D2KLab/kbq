@@ -132,9 +132,9 @@ $(document).ready(function() {
             form: 'runexpriment',
         };
 
-        
+        var classVal = $classNameDom.val();
 
-        if($classNameDom.val()==""|| $classNameDom.val()==null){
+        if(classVal==""|| classVal==null){
             
             alert('Please Select a Class Name');
             return false;
@@ -169,7 +169,7 @@ $(document).ready(function() {
                     $msg.append('<div>'+
                                 '<p>Experiment Status:'+data.status+'</p>'+
                                 '<p>Experiment ID:'+ data.expId +'</p>'+
-                                '<p>This experiment is in the waiting list for activation. Please Send an Email to mohammad.rashid@polito.it to activate the process</p>'+
+                                '<p>This experiment is in the waiting list for activation. Please Send an Email to <a href="mailto::mohammad.rashid@polito.it">mohammad.rashid@polito.it</a> to activate the process</p>'+
                                 '<p>All <a href="/active"> Active Experiments</a></p>'+
                                 '</div>');   
                 }

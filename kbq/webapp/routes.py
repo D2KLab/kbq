@@ -81,14 +81,13 @@ def resultView(expId):
 
     statHpersistency = hper.meaures(expId)
     
-    HperValue = hper.H_persistencyValue(expId)
+    HperValue = float(str(round(hper.H_persistencyValue(expId), 2)))
 
     statCompleteness = comp.meaures(expId)
-    comValue = comp.comp_value(expId)
+    comValue = float(str(round(comp.comp_value(expId), 2)))
     print(comValue)    
     statConsistency = cons.meaures(expId)
-    conValue = cons.consistency_value(expId)
-    
+    conValue = float(str(round(cons.consistency_value(expId), 2)))
     #print(stat)
     return render_template('results.html', resultsConsistency = statConsistency,conValue=conValue, comValue = comValue, HperValue = HperValue, df = df, entity = entity, resultsCompleteness = statCompleteness[1:10],resultsPersistency = statPersistency,resultsHpersistency = statHpersistency, perValue = perValue)
 
