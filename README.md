@@ -11,15 +11,13 @@ The package `KBQ` is composed of the following modules:
 - `rest`, which contains the scripts for quality assessment and validation rest apis;
 
 
-## Instruction
 
-KBQ is hosted on the website: 
+## Instruction
 
 If you want to run the webapp locally, you need to first clone the repository and then install the requirements:
 
 ```bash
 $ pip install -r requirements.txt
-$ python run.py
 ```
 
 ## Team
