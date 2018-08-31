@@ -25,8 +25,7 @@ $(document).ready(function() {
 
 
     $('#btnEndpoint').on('click',function(){
-        
-     
+             
         var postData = {
             endpoint: $endpointDom.val(),
             form: 'endpoint',
@@ -55,7 +54,7 @@ $(document).ready(function() {
 
                 //Change div color
                 $('#one').css('background-color', 'black');
-                
+        
                 //Remove color
                 //$('#two').css('background-color', '');
                 
@@ -133,7 +132,9 @@ $(document).ready(function() {
             form: 'runexpriment',
         };
 
-        if($classNameDom==""|| $classNameDom==null){
+        
+
+        if($classNameDom.val()==""|| $classNameDom.val()==null){
             
             alert('Please Select a Class Name');
             return false;
