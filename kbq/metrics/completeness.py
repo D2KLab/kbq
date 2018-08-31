@@ -49,7 +49,7 @@ class Completeness(Metrics):
             trace['name'] = property
             data_plot.append(trace)
 
-        return data_plot[1:10]
+        return data_plot
 
     def comp_value(self,expId):
 

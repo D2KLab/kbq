@@ -20,19 +20,24 @@ $(document).ready(function() {
     var msgTemplate = "<li> Experiment Created. Please Send an Email to mohammad.rashid@polito.it to activate the process.</li>";
     function addMsg(msg){
         //$msg.append(Mustache.render(msgTemplate,msg));
-        $msg.append('<li> Experiment Created. Please Send an Email to mohammad.rashid@polito.it to activate the process.</li>')
+        $msg.append('<p> Experiment Created. Please Send an Email to mohammad.rashid@polito.it to activate the process.</p>')
     }
 
 
     $('#btnEndpoint').on('click',function(){
         
-        $.LoadingOverlay("show");
-
+     
         var postData = {
             endpoint: $endpointDom.val(),
             form: 'endpoint',
         };
 
+        if($endpointDom==""|| $endpointDom==null){
+            alert('Please Enter a Valid SPARQL endpoint');
+            return false;  
+        }
+        else{
+        $.LoadingOverlay("show");
         $.ajax({
             
             type: 'POST',
@@ -49,7 +54,8 @@ $(document).ready(function() {
                 }
 
                 //Change div color
-                $('#two').css('background-color', 'black');
+                $('#one').css('background-color', 'black');
+                
                 //Remove color
                 //$('#two').css('background-color', '');
                 
@@ -67,22 +73,28 @@ $(document).ready(function() {
                 alert('server error')
                 $.LoadingOverlay("hide");
             }
-        });  
+        });
+        }  
         event.preventDefault(); 
     });
 
     $('#btnGraph').on('click',function(){
-        
-        $.LoadingOverlay("show");
-
+ 
         var postDataGraph = {
             endpoint: $endpointDom.val(),
             graph: $graphDom.val(),
             form: 'graph',
         };
 
-        $.ajax({
-            
+        var names = $graphDom.val();
+
+        if(names=="" || names==null){
+            alert('Please Select a Graph Name');
+            return false;         
+        }
+        else{
+        $.LoadingOverlay("show");    
+        $.ajax({ 
             type: 'POST',
             url: '/experiment',
             data: postDataGraph,
@@ -96,25 +108,24 @@ $(document).ready(function() {
 					datalist.append(option);
                 }
 
-                $('#three').css('background-color', 'black');
+                $('#two').css('background-color', 'black');
                 document.getElementById("btnRunExp").disabled = false;
                 document.getElementById("className").disabled = false;
 
                 $.LoadingOverlay("hide");
             },
             error: function(){
-                alert('server error')
                 $.LoadingOverlay("hide");
+                alert('Error in acessing the Graph Data. Please check name of the Graph.')
             }
             
-        });  
+        });
+        }  
         event.preventDefault(); 
     });
 
     $('#btnRunExp').on('click',function(){
         
-        $.LoadingOverlay("show");
-
         var postDataClass = {
             endpoint: $endpointDom.val(),
             graph: $graphDom.val(),
@@ -122,6 +133,14 @@ $(document).ready(function() {
             form: 'runexpriment',
         };
 
+        if($classNameDom==""|| $classNameDom==null){
+            
+            alert('Please Select a Class Name');
+            return false;
+            
+        }
+        else{
+        $.LoadingOverlay("show");    
         $.ajax({
             
             type: 'POST',
@@ -142,13 +161,20 @@ $(document).ready(function() {
                                 '<p>Experiment ID:'+ data.expId +'</p>'+
                                 '<p>Please Send an Email to mohammad.rashid@polito.it to activate the process.</p>'+
                                 '</div>');    
-
                 }else{
-                    alert('Experiment Already Exists')
+                    //alert('Experiment Already Exists')
+                    $msg.empty(); 
+
+                    $msg.append('<div>'+
+                                '<p>Experiment Status:'+data.status+'</p>'+
+                                '<p>Experiment ID:'+ data.expId +'</p>'+
+                                '<p>This experiment is in the waiting list for activation. Please Send an Email to mohammad.rashid@polito.it to activate the process</p>'+
+                                '<p>All <a href="/active"> Active Experiments</a></p>'+
+                                '</div>');   
                 }
               
                 $.LoadingOverlay("hide");
-
+                $('#three').css('background-color', 'black');
                 $('#four').css('background-color', 'black');
 
                 document.getElementById("btnReset").disabled = false;
@@ -162,7 +188,8 @@ $(document).ready(function() {
                 $.LoadingOverlay("hide");
             }
             
-        });  
+        });
+        }  
         event.preventDefault(); 
     });
 
@@ -171,6 +198,7 @@ $(document).ready(function() {
         document.getElementById("graph").value = '';
 
         $("datalist-graph").empty();
+        $('#one').css('background-color', '');
         $('#two').css('background-color', '');
         $('#three').css('background-color', '');
         $('#four').css('background-color', '');

@@ -45,10 +45,12 @@
          <div class="col-lg-9">
                 <div class="card bg-light mb-3" style="max-width: 90rem;">
                                    <div class="card-body">
-                                        <h4 class="card-title">Class Name: {{entity}}</h4>
+                                        <h4 class="card-title">Class Name: <a href="{{entity}}"> {{entity}} </a></h4>
       
                                    </div>
                 </div>
+
+                <hr>
 
                 <table id="example3" class="display" style="width:100%">
                                 <thead>
@@ -117,6 +119,7 @@
         <div class="col-lg-9">
                         <div class="card bg-light mb-3" style="max-width: 80rem;">
                                         <div class="card-body">
+                                             <h4 class="card-title">Percentage(%) of completeness</h4>
                                              <p class="card-text">High % presentes an estimation of fewer isses.</p>
                                              <p class="card-text">Lower % entail an estimation of more isses.</p>  
                                         </div>
@@ -125,7 +128,7 @@
         </div>
         
 </div>
-
+<hr>
 <div id="plotCompleteness"></div>
 <hr>
 
@@ -137,44 +140,88 @@
                                           <h3 class="card-title">Consistency ({{conValue}}%) </h3>
                                           <h4 class="card-title"></h4>
                                         </div>
-                        </div>
+                </div>
+                <div class="card bg-light mb-3" style="max-width: 20rem;">
+                                <div class="card-body">
+                                     <h4 class="card-title">Percentage(%) of consistency</h4>
+                                     <p class="card-text">Consistency value (0,1): The value of 1 implies no Consistency issue present in the property. 
+                                             The value of 0 indicates Consistency issues found in the property</p>
+                                     <p class="card-text"></p>  
+                                </div>
+                </div>
+
+                <!--<a href="#" id="modal_button_id" class="list-group-item list-group-item-action flex-column align-items-start" data-toggle="modal" data-target="#exampleModalCenter">
+                                <div class="d-flex w-100 justify-content-between">
+                                  <h5 class="mb-1">SPARQL Queries</h5>                                                         
+                                </div>
+                                <p class="mb-1">View Entities Using SPARQL Queries
+                                </p>
+                                <small class="text-muted">Select Rows to Generate SPARQL Queries</small>
+                </a>--> 
+
         </div>
         <div class="col-lg-9">
-                        <div class="card bg-light mb-3" style="max-width: 80rem;">
-                                        <div class="card-body">
-                                             <p class="card-text">The value of 1 implies no Consistency issue present in the property. 
-                                                     The value of 0 indicates Consistency issues found in the property</p>
-                                             <p class="card-text"></p>  
-                                        </div>
-                        </div>
+                <div class="row">
+                       
+                </div>
+                
+                <div class="row">
+                        
+                        <table id="example" class="display" style="width:100%">
+                                        <thead>
+                                                <tr>
+                                                            <th>Perperty</th>
+                                                            <th>Date</th>
+                                                            <th>Consistency</th>
+                                                            
+                                       
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                            {% for result in resultsConsistency %}
+                                                            <tr>
+                                                                    <th>{{result.name}}</th>
+                                                                    <th>{{result.x[-1]}}</th>
+                                                                    <th>{{result.Consistency}}</th>
+                
+                                                            </tr>
+                                                            {% endfor %}
+                                            </tbody>
+                
+                        </table>
+                </div>
+        
+                                <!-- Modal HTML embedded directly into document -->
+
         </div>         
 </div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body" id="modelBody">
+                                                                                
+                                  </div>
+                                  
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                  </div>
+                                </div>
+                </div>
+        </div>
 
-            <hr>
-                <table id="example" class="display" style="width:100%">
-                        <thead>
-                                <tr>
-                                            <th>Perperty</th>
-                                            <th>Timestamp</th>
-                                            <th>Consistency</th>
-                       
-                                </tr>
-                            </thead>
-                            <tbody>
-                                            {% for result in resultsConsistency %}
-                                            <tr>
-                                                    <th>{{result.name}}</th>
-                                                    <th>{{result.x[-1]}}</th>
-                                                    <th>{{result.Consistency}}</th>
+        <hr>
 
-                                            </tr>
-                                            {% endfor %}
-                            </tbody>
-
-                    </table>
-
+               
                     <hr>
-            <hr>
+        <hr>
+
+
 
   <!-- <div id="plotConsistency"></div> -->
 
@@ -187,6 +234,7 @@
         Plotly.plot(plotPersistency,graphHper);
 
         Plotly.plot(plotCompleteness,graphsComp);
+
              
 </script>       
             

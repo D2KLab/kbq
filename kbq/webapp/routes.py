@@ -36,12 +36,20 @@ def active_experiment():
     results = get_all_experiment()
 
     res_active=[]
+    sparql_list = []
 
     for result in results:
         if str(result['enabled']) == "True":
             res_active.append(result)
+    
+    for sparql in res_active:
+        sparql_list.append(sparql['sparql'])
 
-    return render_template('active.html', results = res_active)
+    unique_sparql_list = list(set(sparql_list))
+
+    print(type(unique_sparql_list))
+
+    return render_template('active.html', results = res_active, unique_sparql_list = unique_sparql_list)
 
 
 #@webapp.route('/results')
@@ -82,7 +90,7 @@ def resultView(expId):
     conValue = cons.consistency_value(expId)
     
     #print(stat)
-    return render_template('results.html', resultsConsistency = statConsistency,conValue=conValue, comValue = comValue, HperValue = HperValue, df = df, entity = entity, resultsCompleteness = statCompleteness,resultsPersistency = statPersistency,resultsHpersistency = statHpersistency, perValue = perValue)
+    return render_template('results.html', resultsConsistency = statConsistency,conValue=conValue, comValue = comValue, HperValue = HperValue, df = df, entity = entity, resultsCompleteness = statCompleteness[1:10],resultsPersistency = statPersistency,resultsHpersistency = statHpersistency, perValue = perValue)
 
 @webapp.route('/experiment',methods = ['GET','POST'])
 def experiment():  
