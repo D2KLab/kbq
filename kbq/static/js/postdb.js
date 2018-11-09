@@ -40,7 +40,7 @@ $(document).ready(function() {
         $.ajax({
             
             type: 'POST',
-            url: '/experiment',
+            url: 'experiment',
             data: postData,
             success: function(data){
                 console.log(data);
@@ -95,7 +95,7 @@ $(document).ready(function() {
         $.LoadingOverlay("show");    
         $.ajax({ 
             type: 'POST',
-            url: '/experiment',
+            url: 'experiment',
             data: postDataGraph,
             success: function(data){
                 console.log(data);
@@ -145,7 +145,7 @@ $(document).ready(function() {
         $.ajax({
             
             type: 'POST',
-            url: '/experiment',
+            url: 'experiment',
             data: postDataClass,
             success: function(data){
  

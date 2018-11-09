@@ -14,6 +14,8 @@ class Config:
     MAIL_USE_TLS = True
     MAIL_USERNAME = os.environ.get('EMAIL_USER')
     MAIL_PASSWORD = os.environ.get('EMAIL_PASS')
+    #JINJA_ENVIRONMENT.globals['STATIC_PREFIX'] = '/'
+    #APPLICATION_ROOT = '/KBQ'
 
     JOBS = []
     #SCHEDULER_JOBSTORES = {
