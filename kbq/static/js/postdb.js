@@ -38,7 +38,6 @@ $(document).ready(function() {
         else{
         $.LoadingOverlay("show");
         $.ajax({
-            
             type: 'POST',
             url: 'experiment',
             data: postData,

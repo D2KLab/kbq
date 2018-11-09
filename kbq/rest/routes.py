@@ -20,7 +20,6 @@ def completeness(expId):
 def consistency(expId):
     cons = Consistency()   
     stat = cons.meaures(expId)
-    
     return jsonify(stat)
 
 
