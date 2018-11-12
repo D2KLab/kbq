@@ -49,7 +49,7 @@ def create_app(config_class = Config):
     scheduler  = APScheduler()
     #scheduler = BackgroundScheduler()
     scheduler.init_app(app)
-    scheduler.add_job(func=scheduler_module,id='1',trigger='interval',hours=10, replace_existing=False)
+    scheduler.add_job(func=scheduler_module,id='1',trigger='interval',hours=24, replace_existing=False)
     #scheduler.add_job(scheduler_module, trigger='interval', seconds=30)
     #scheduler.add_job(func=scheduler_module,id='1', trigger='interval', seconds=30)
     scheduler.start()

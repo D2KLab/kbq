@@ -1,0 +1,102 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+   <!-- <script src="KBQ/{{ url_for('static', filename='js/postdb.js') }}"></script> -->
+    <h2 class="pb-3 pt-2">Experiment Configuration</h2>
+    <hr class="my-4">
+
+    <!--first section-->
+      <div class="row align-items-center how-it-works">
+        <div class="col-2 text-center full">
+          <div class="circle" id="one">1</div>
+        </div>
+        <div class="col-6">
+        <div class="list-group-item list-group-item-action flex-column align-items-start">
+            <h5>SPARQL Endpoint</h5>
+            <p></p>
+            <form method="POST" action="" id="formEndpoint">
+                               
+                        <div class="form-group">
+                            <label class="sr-only" for="endpoint">Sparql Endpoint</label>
+                            <input type="text" class="form-control" id="endpoint" name="endpoint" value="https://kb.3cixty.com/sparql">
+                        </div>
+                        <p>
+                            <!--<input class="btn btn-primary" type="submit" value="Collect"> -->
+                            <button id = "btnEndpoint" class="btn btn-primary">Collect</button>
+                        </p>    
+          </form>
+        </div>
+        
+        </div>
+      </div>
+
+       <!--Second section-->
+       <div class="row align-items-center how-it-works">
+            <div class="col-2 text-center full" >
+              <div class="circle" id="two">2</div>
+            </div>
+            <div class="col-6">
+                    <hr class="my-4">
+            <div class="list-group-item list-group-item-action flex-column align-items-start">
+                <h5>Select a Graph Name</h5>
+                <p></p>
+                <form method="POST" action="" id="formGraph">
+                              
+                        <div class="form-group">
+                            <input type="text" id="graph" name="graph" list="datalist-graph" placeholder="e.g. Select a Graph" class="form-control">
+                            <datalist id="datalist-graph"></datalist>
+                        </div>
+                        <p>
+                          <button id = "btnGraph" class="btn btn-primary">Collect</button>
+                        </p>    
+                    </form>
+            </div>
+            
+            </div>
+          </div>
+
+      <!--third section-->
+       <div class="row align-items-center how-it-works">
+            <div class="col-2 text-center full">
+              <div class="circle" id ="three">3</div>
+            </div>
+            <div class="col-6">
+                     <hr class="my-4">
+            <div class="list-group-item list-group-item-action flex-column align-items-start">
+                <h5>Select a Class Name</h5>
+                <p></p>
+                <form method="POST" action="">
+                            
+                  <div class="form-group">
+                      <input type="text" id="className" list="datalist-className" placeholder="e.g. Class Names" class="form-control">
+                      <datalist class="datalist scrollable" id="datalist-className" style="overflow-y: auto!important"></datalist>
+                  </div>
+                      <p>
+                        <button id = "btnRunExp" class="btn btn-primary">Run Experiment</button>
+                      </p>
+                </form>
+            </div>
+            
+            </div>
+          </div>
+
+       <!--fourth section-->
+       <div class="row align-items-center how-it-works">
+            <div class="col-2 text-center full">
+              <div class="circle" id = "four">4</div>
+            </div>
+            <div class="col-6">
+                    <hr class="my-4">
+            <div class="list-group-item list-group-item-action flex-column align-items-start">
+                <h5>Notifcations</h5>
+                  <p id="notify_status"></p>
+                  <div id="notify_msg"></div>
+                <button id = "btnReset" class="btn btn-primary">Reset Configurations</button>
+            </div>
+            
+            </div>
+          </div>
+
+
+{% endblock %}
