@@ -21,7 +21,7 @@ $ pip install -r requirements.txt
 
 ## Team
 
-- Mohammad Rashid <diego.monti@polito.it>
+- Mohammad Rashid <rifat.abir@gmail.com>
 - Giuseppe Rizzo <giuseppe.rizzo@ismb.it>
 - Marco Torchiano <marco.torchiano@polito.it>
 - Nandana Mihindukulasooriya <nmihindu@fi.upm.es>
